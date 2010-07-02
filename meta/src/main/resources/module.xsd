@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://tangram.ncestar.org/schema/1.0/module"
+           xmlns:m="http://tangram.ncestar.org/schema/1.0/module"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified" version="3">
+    <xs:element name="module">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="1" name="javadoc" type="xs:string"/>
+                <xs:element minOccurs="0" maxOccurs="1" name="use">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="module" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="m:model"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="m:view"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="m:processes"/>
+            </xs:sequence>
+            <xs:attribute name="name" use="required" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="model">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="m:class"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="class">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="1" name="javadoc" type="xs:string"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="m:property"/>
+                <xs:element name="listeners" minOccurs="0" maxOccurs="unbounded" type="m:EntityListeners"/>
+            </xs:sequence>
+            <xs:attribute name="name" use="required" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="property">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="listeners" type="m:PropertyListeners"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="validators" type="m:PropertyValidators"/>
+            </xs:sequence>
+            <xs:attribute name="name" use="required" type="xs:string"/>
+            <xs:attribute name="label" use="required" type="xs:string"/>
+            <xs:attribute name="type" use="required" type="xs:string"/>
+            <xs:attribute name="length" use="optional" type="xs:int"/>
+            <xs:attribute name="required" use="optional" type="xs:boolean" default="false"/>
+            <xs:attribute name="editable" use="optional" type="xs:boolean" default="false"/>
+            <xs:attribute name="notNull" use="optional" type="xs:boolean" default="false"/>
+            <xs:attribute name="array" use="optional" type="xs:boolean" default="false"/>
+            <xs:attribute name="reference" use="optional" type="xs:boolean" default="false"/>
+            <xs:attribute name="oneToOne" use="optional" type="xs:boolean" default="true"/>
+            <xs:attribute name="oneToMany" use="optional" type="xs:boolean" default="false"/>
+            <xs:attribute name="manyToMany" use="optional" type="xs:boolean" default="false"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="PropertyValidators">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="validator" type="m:PropertyValidator"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PropertyValidator">
+        <xs:attribute name="type" use="required" type="m:languageType"/>
+        <xs:attribute name="file" use="optional" type="xs:string"/>
+        <xs:attribute name="class" use="optional" type="xs:string"/>
+        <xs:attribute name="method" use="optional" type="xs:string"/>
+    </xs:complexType>
+    <xs:simpleType name="languageType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="groovy"/>
+            <xs:enumeration value="java"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="PropertyListeners">
+        <xs:sequence>
+            <xs:element name="listener" minOccurs="0" maxOccurs="unbounded" type="m:PropertyListener"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PropertyListener">
+        <xs:attribute name="event" use="required" type="m:PropertyEventType"/>
+        <xs:attribute name="type" use="required" type="m:languageType"/>
+        <xs:attribute name="file" use="optional" type="xs:string"/>
+        <xs:attribute name="class" use="optional" type="xs:string"/>
+        <xs:attribute name="method" use="optional" type="xs:string"/>
+    </xs:complexType>
+    <xs:simpleType name="PropertyEventType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="onChange"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="EntityEventType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="afterAdd"/>
+            <xs:enumeration value="afterLoad"/>
+            <xs:enumeration value="afterPersist"/>
+            <xs:enumeration value="afterRemove"/>
+            <xs:enumeration value="afterUpdate"/>
+            <xs:enumeration value="beforePersist"/>
+            <xs:enumeration value="beforeRemove"/>
+            <xs:enumeration value="beforeUpdate"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="EntityListeners">
+        <xs:sequence>
+            <xs:element name="listener" minOccurs="0" maxOccurs="unbounded" type="m:EntityListener"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="EntityListener">
+        <xs:attribute name="event" use="required" type="m:EntityEventType"/>
+        <xs:attribute name="type" use="required" type="m:languageType"/>
+        <xs:attribute name="file" use="optional" type="xs:string"/>
+        <xs:attribute name="class" use="optional" type="xs:string"/>
+        <xs:attribute name="method" use="optional" type="xs:string"/>
+    </xs:complexType>
+    <xs:element name="view">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="1" name="navigation" type="m:Navigation"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="window" type="m:Window"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="Navigation">
+        <xs:sequence>
+            <!--<xs:element minOccurs="0" maxOccurs="1" name="application" type="m:NavigationSubApplication"/>-->
+            <xs:element name="favoriteMenu" minOccurs="0" maxOccurs="unbounded" type="m:NavigationMenu"/>
+            <xs:element name="moduleMenu" minOccurs="0" maxOccurs="unbounded" type="m:NavigationMenu"/>
+            <xs:element name="shortcutMenu" minOccurs="0" maxOccurs="unbounded" type="m:NavigationMenu"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="NavigationMenu">
+        <xs:sequence>
+            <xs:element name="menuItem" minOccurs="0" maxOccurs="unbounded" type="m:NavigationMenuItem"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="label" type="xs:string" use="required"/>
+        <xs:attribute name="icon" type="xs:string" use="optional"/>
+    </xs:complexType>
+    <xs:complexType name="NavigationMenuItem">
+        <xs:sequence>
+            <xs:element name="menuItem" minOccurs="0" maxOccurs="unbounded" type="m:NavigationMenuItem"/>
+        </xs:sequence>
+        <xs:attribute name="name" use="required" type="xs:string"/>
+        <xs:attribute name="label" type="xs:string" use="required"/>
+        <xs:attribute name="icon" type="xs:string" use="required"/>
+        <xs:attribute name="type" type="xs:string" use="required"/>
+        <xs:attribute name="target" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Window">
+        <xs:sequence>
+            <xs:element name="form" minOccurs="0" maxOccurs="1" type="m:ViewForm"/>
+            <xs:element name="grid" minOccurs="0" maxOccurs="1" type="m:ViewGrid"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ViewForm">
+        <xs:sequence>
+            <xs:element name="group" minOccurs="0" maxOccurs="unbounded" type="m:ViewGroup"/>
+            <xs:element name="tabSheet" minOccurs="0" maxOccurs="unbounded" type="m:ViewTabSheet"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ViewGrid">
+        <xs:sequence>
+            <xs:element name="field" minOccurs="0" maxOccurs="unbounded" type="m:ViewField"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ViewGroup">
+        <xs:sequence>
+            <xs:element name="field" minOccurs="0" maxOccurs="unbounded" type="m:ViewField"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ViewTabSheet">
+        <xs:sequence>
+            <xs:element name="tab" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="group" minOccurs="0" maxOccurs="unbounded" type="m:ViewGroup"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ViewField">
+        <xs:sequence>
+            <xs:element name="listener" minOccurs="0" maxOccurs="unbounded" type="m:ViewListener"/>
+        </xs:sequence>
+        <xs:attribute name="name" use="required" type="xs:string"/>
+        <xs:attribute name="type" use="required" type="xs:string"/>
+        <xs:attribute name="label" use="required" type="xs:string"/>
+        <xs:attribute name="hint" use="optional" type="xs:string"/>
+        <xs:attribute name="property" use="optional" type="xs:string"/>
+        <xs:attribute name="getter" use="optional" type="xs:string"/>
+        <xs:attribute name="setter" use="optional" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="ViewListener">
+        <xs:sequence>
+
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="processes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="m:process"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="process">
+        <xs:complexType>
+            <xs:sequence>
+
+            </xs:sequence>
+            <xs:attribute name="name" use="required" type="xs:string"/>
+            <xs:attribute name="type" use="required" type="m:ProcessType"/>
+            <xs:attribute name="path" use="required" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="ProcessType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="RuleFlow"/>
+            <xs:enumeration value="OSWorkflow"/>
+            <xs:enumeration value="jPDL"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
