@@ -16,15 +16,15 @@
  */
 
 package org.tangram.meta.domain;
- /**
-  * <p>Title: Listener</p>
-  * <p>Description: Listener </p>
-  * <p>Organization: OssJet.org </p>
-  * <p>Created: 2010-7-6 </p>
-  *
-  * @author Li Guoqiang<mail.lgq@gmail.com>
-  * @version 1.0
-  */
-public interface Listener {
-     
+
+/**
+ * <p>Title: Validator</p>
+ * <p>Description: Validator </p>
+ * <p>Organization: OssJet.org </p>
+ * <p>Created: 2010-7-6 </p>
+ *
+ * @author Li Guoqiang<mail.lgq@gmail.com>
+ * @version 1.0
+ */
+public interface Validator {
 }

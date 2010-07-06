@@ -8,7 +8,7 @@
         <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <name>tangram.meta</name>
     <groupId>org.tangram</groupId>
     <artifactId>meta</artifactId>
 

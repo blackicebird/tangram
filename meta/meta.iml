@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_5" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -12,7 +12,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="Maven: com.sun.xml.bind:jaxb1-impl:2.2" level="project" />
+    <orderEntry type="library" exported="" name="Maven: javax.xml.bind:jaxb-api:2.2" level="project" />
+    <orderEntry type="library" exported="" name="Maven: javax.xml.stream:stax-api:1.0-2" level="project" />
+    <orderEntry type="library" exported="" name="Maven: javax.activation:activation:1.1" level="project" />
+    <orderEntry type="library" exported="" name="Maven: com.sun.xml.bind:jaxb-impl:2.2" level="project" />
     <orderEntry type="library" exported="" name="Maven: org.slf4j:slf4j-api:1.6.0" level="project" />
     <orderEntry type="library" exported="" name="Maven: org.slf4j:slf4j-simple:1.6.0" level="project" />
     <orderEntry type="library" exported="" scope="RUNTIME" name="Maven: org.slf4j:jcl-over-slf4j:1.6.0" level="project" />
