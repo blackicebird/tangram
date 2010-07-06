@@ -14,9 +14,9 @@
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="m:model"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="m:view"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="m:processes"/>
+                <xs:element minOccurs="0" maxOccurs="1" ref="m:model"/>
+                <xs:element minOccurs="0" maxOccurs="1" ref="m:view"/>
+                <xs:element minOccurs="0" maxOccurs="1" ref="m:processes"/>
             </xs:sequence>
             <xs:attribute name="name" use="required" type="xs:string"/>
         </xs:complexType>
@@ -36,6 +36,7 @@
                 <xs:element name="listeners" minOccurs="0" maxOccurs="unbounded" type="m:EntityListeners"/>
             </xs:sequence>
             <xs:attribute name="name" use="required" type="xs:string"/>
+            <xs:attribute name="parent" use="optional" type="xs:string"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="property">
@@ -47,7 +48,7 @@
             <xs:attribute name="name" use="required" type="xs:string"/>
             <xs:attribute name="label" use="required" type="xs:string"/>
             <xs:attribute name="type" use="required" type="xs:string"/>
-            <xs:attribute name="length" use="optional" type="xs:int"/>
+            <xs:attribute name="length" use="optional" type="xs:integer"/>
             <xs:attribute name="required" use="optional" type="xs:boolean" default="false"/>
             <xs:attribute name="editable" use="optional" type="xs:boolean" default="false"/>
             <xs:attribute name="notNull" use="optional" type="xs:boolean" default="false"/>
@@ -211,7 +212,7 @@
     <xs:element name="process">
         <xs:complexType>
             <xs:sequence>
-
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="parameter" type="xs:string"/>
             </xs:sequence>
             <xs:attribute name="name" use="required" type="xs:string"/>
             <xs:attribute name="type" use="required" type="m:ProcessType"/>

@@ -16,11 +16,26 @@
  */
 
 package org.tangram.meta.domain;
-
-public class Process {
-    private String name;
-
-    public String getName() {
-        return name;
-    }
+ /**
+  * <p>Title: Property</p>
+  * <p>Description: Property </p>
+  * <p>Organization: OssJet.org </p>
+  * <p>Created: 2010-7-6 </p>
+  *
+  * @author Li Guoqiang<mail.lgq@gmail.com>
+  * @version 1.0
+  */
+public class Property {
+     private String name;
+     private String label;
+     private String type;
+     private Integer length;
+     private Boolean required = Boolean.FALSE;
+     private Boolean editable = Boolean.FALSE;
+     private Boolean notNull = Boolean.FALSE;
+     private Boolean array = Boolean.FALSE;
+     private Boolean reference  = Boolean.FALSE;
+     private Boolean oneToOne  = Boolean.FALSE;
+     private Boolean oneToMany  = Boolean.FALSE;
+     private Boolean manyToMany  = Boolean.FALSE;
 }
